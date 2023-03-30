@@ -20,6 +20,7 @@ import PokemonCard from '../components/PokemonCard.vue'
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -29,6 +30,7 @@ export default {
   },
 
   mounted() {
+
     fetch('https://pokeapi.co/api/v2/generation/1/')
       .then(response => response.json())
       .then(data => {
@@ -43,12 +45,22 @@ export default {
           .then(pokemonDataList => {
             this.pokemons = pokemonDataList.map(pokemonData => {
               return {
+                id: pokemonData.id,
                 sprite: pokemonData.sprites.front_default,
                 name: pokemonData.name,
+                height: pokemonData.height,
+                weight: pokemonData.weight,
+                stats: pokemonData.stats.map(stat => {
+                  return {
+                    stat: stat.stat.name,
+                    value: stat.base_stat,
+                  }
+                }),
                 types: pokemonData.types.map(type => type.type.name),
+                moveList: pokemonData.moves.map(move => move.move.name),
               };
             });
-
+            console.log(this.pokemons)
             this.randomPoke = this.pokemons[Math.floor(Math.random() * pokemonDataPromises.length)]
           });
     });

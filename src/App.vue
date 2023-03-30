@@ -1,9 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <div>
+    <RouterLink to="/list">POKEMON LIST</RouterLink>
+    <RouterLink to="/guess">WHO IS THAT POKEMON</RouterLink>
+  </div>
   <RouterView />
 </template>
 
